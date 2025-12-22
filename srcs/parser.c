@@ -47,7 +47,7 @@ void parse_number(char *str, t_stack **a)
 	tmp = *a;
 	while (tmp)
 	{
-		if (tmp->value == (int)n);
+		if (tmp->value == (int)n)
 			error();
 		tmp = tmp->next;
 	}
