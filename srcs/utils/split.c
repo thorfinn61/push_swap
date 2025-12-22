@@ -1,3 +1,5 @@
+#include "push_swap.h"
+
 int is_sep(char c, char sep)
 {
     if (c == sep)
@@ -76,5 +78,3 @@ char    **ft_split(char const *s, char c)
     write_split(res, s, c);
     return (res);
 }
-                                                                                                              6,1           12%
-

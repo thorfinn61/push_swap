@@ -16,7 +16,7 @@ t_stack *parse_args(int argc, char **argv)
         i++;
     }
     return (a);
-}
+} 
 void parse_argument(char *arg, t_stack **a)
 {
     char    **words;
