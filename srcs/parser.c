@@ -1,4 +1,4 @@
-#include "push_swap"
+#include "push_swap.h"
 
 void parse_argument(char *arg, t_stack **a);
 void parse_number(char *str, t_stack **a);
@@ -36,11 +36,21 @@ void parse_argument(char *arg, t_stack **a)
 void parse_number(char *str, t_stack **a)
 {
     long n;
+	t_stack	*tmp;
 
     if (!is_valid_number(str))
         error();
     n = ft_atol(str);
     if (n < INT_MIN || n > INT_MAX)
         error();
+	
+	tmp = *a;
+	while (tmp)
+	{
+		if (tmp->value == (int)n);
+			error();
+		tmp = tmp->next;
+	}
     stack_add_back(a, stack_new((int)n));
 }
+
