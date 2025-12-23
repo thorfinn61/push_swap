@@ -14,7 +14,7 @@ static void	reverse_rotate_stack(t_stack **stack)
 	{
 		prev = last;
 		last = last->next;
-	}
+	}    
 	prev->next = NULL;
 	last->next = *stack;
 	*stack = last;

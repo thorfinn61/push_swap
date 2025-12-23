@@ -36,7 +36,7 @@ int     stack_size(t_stack *stack)
 
 	i = 0;
 	tmp = stack;
-	while(tmp)
+	while (tmp)
 	{
 		i++;
 		tmp = tmp->next;
