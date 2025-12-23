@@ -14,11 +14,16 @@ SRCS        = srcs/parser.c \
               srcs/stack.c \
               srcs/utils/error.c \
 			  srcs/utils/split.c \
-              srcs/swap.c \
-              srcs/push.c \
-              srcs/rotate.c \
-              srcs/rrotate.c \
-              srcs/sort_small.c \
+              srcs/instructions/swap.c \
+              srcs/instructions/push.c \
+              srcs/instructions/rotate.c \
+              srcs/instructions/rrotate.c \
+			  srcs/sort/sort_adaptive.c \
+              srcs/sort/sort_small.c \
+			  srcs/sort/sort_simple.c \
+			  srcs/sort/sort_medium.c \
+			  srcs/sort/sort_complex.c \
+			  srcs/disorder.c \
 
 OBJS        = $(SRCS:.c=.o)
 
