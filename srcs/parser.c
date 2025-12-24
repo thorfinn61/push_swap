@@ -55,3 +55,31 @@ void parse_number(char *str, t_stack **a)
     stack_add_back(a, stack_new((int)n));
 }
 
+int	parse_flag(int ac, char **av, int *strat, int *bench)
+{
+	int i;
+
+	*strat = 0;
+	*bench = 0;
+	i = 1;
+	while (i < ac)
+	{
+		if (ft_strncmp(av[i], "--", 2) != 0)
+			break;
+		if (ft_strncmp(av[i], "--bench", 8) == 0)
+			*bench = 1;
+		else if (ft_strncmp(av[i], "--simple", 9) == 0)
+			*strat = 1;
+		else if (ft_strncmp(av[i], "--medium", 9) == 0)
+			*strat = 2;
+		else if (ft_strncmp(av[i], "--complex", 10) == 0)
+			*strat = 3;
+		else if (ft_strncmp(av[i], "--adaptative", 11) == 0)
+			*strat = 4;
+		else
+			error();
+		i++;
+	}
+	return (i);
+}
+

@@ -20,6 +20,8 @@ char    	**ft_split(char const *s, char c);
 int			is_valid_number(char *str);
 long		ft_atol(const char *str);
 void    	free_split(char **split);
+int		ft_strncmp(char *s1, char *s2, int n);
+int		parse_flag(int ac, char **av, int *strat, int *bench);
 
 //Stack
 t_stack *stack_new(int value);
