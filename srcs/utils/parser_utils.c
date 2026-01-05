@@ -62,7 +62,7 @@ void    free_split(char **split)
 
 int	ft_strncmp(char *s1, char *s2, int n)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	if (n == 0)

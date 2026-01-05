@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 
-	sort_adaptative(&a, &b);
+	sort_adaptive(&a, &b);
 
 	free_stack(a);
 	free_stack(b);
