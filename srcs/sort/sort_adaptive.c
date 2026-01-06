@@ -5,9 +5,9 @@ void	sort_adaptive(t_stack **a, t_stack **b)
 	double disorder;
 
 	disorder = compute_disorder(*a);
-	if (disorder < 0.15)
+	if (disorder < 0.2)
 		sort_simple(a, b);
-	else if (disorder < 0.40)
+	else if (disorder < 0.5)
 		sort_medium(a, b);
 	else
 		sort_complex(a, b);

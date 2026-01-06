@@ -52,6 +52,10 @@ double	compute_disorder(t_stack *a);
 //Sort
 void	sort_simple(t_stack **a, t_stack **b );
 void	sort_medium(t_stack **a, t_stack **b);
+void	chunk_sort(t_stack **a, t_stack **b);
+int	*prepare_sorted_array(t_stack *s, int size);
+void	push_chunk_to_b(t_stack **a, t_stack **b, int min, int max);
+void	move_back_to_a(t_stack **a, t_stack **b);
 void	sort_complex(t_stack **a, t_stack **b);
 void	sort_adaptive(t_stack **a, t_stack **b);
 #endif
