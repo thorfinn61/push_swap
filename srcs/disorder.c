@@ -1,17 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   disorder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/06 18:37:45 by elsahin           #+#    #+#             */
+/*   Updated: 2026/01/06 18:50:28 by elsahin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 double	compute_disorder(t_stack *a)
 {
 	t_stack	*i;
 	t_stack	*j;
-	double mistakes;
-	double total;
+	double	mistakes;
+	double	total;
+
 	if (!a || !a->next)
 		return (0.0);
-	
 	mistakes = 0;
 	total = 0;
-
 	i = a;
 	while (i)
 	{

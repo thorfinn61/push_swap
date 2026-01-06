@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/06 18:38:44 by elsahin           #+#    #+#             */
+/*   Updated: 2026/01/06 18:44:58 by elsahin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	is_valid_number(char *str)
 {
-	int i;
+	int	i;
 
 	if (!str || str[0] == '\0')
 		return (0);
@@ -21,6 +33,7 @@ int	is_valid_number(char *str)
 	}
 	return (1);
 }
+
 long	ft_atol(const char *str)
 {
 	long	result;
@@ -30,7 +43,6 @@ long	ft_atol(const char *str)
 	result = 0;
 	sign = 1;
 	i = 0;
-
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
@@ -45,19 +57,19 @@ long	ft_atol(const char *str)
 	return (result * sign);
 }
 
-void    free_split(char **split)
+void	free_split(char **split)
 {
-    int i;
+	int	i;
 
-    if (!split)
-        return;
-    i = 0;
-    while (split[i])
-    {
-        free(split[i]);
-        i++;
-    }
-    free(split);
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
 
 int	ft_strncmp(char *s1, char *s2, int n)

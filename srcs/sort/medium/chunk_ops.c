@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   chunk_ops.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/06 18:39:54 by elsahin           #+#    #+#             */
+/*   Updated: 2026/01/06 18:47:04 by elsahin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int	find_next_in_chunk(t_stack *stack, int chunk_min, int chunk_max)
@@ -7,8 +19,7 @@ static int	find_next_in_chunk(t_stack *stack, int chunk_min, int chunk_max)
 	pos = 0;
 	while (stack)
 	{
-		if (stack->value >= chunk_min
-			&& stack->value <= chunk_max)
+		if (stack->value >= chunk_min && stack->value <= chunk_max)
 			return (pos);
 		stack = stack->next;
 		pos++;
@@ -40,12 +51,13 @@ static int	find_max_pos(t_stack *stack)
 	return (max_pos);
 }
 
-void	push_chunk_to_b(t_stack **stack_a, t_stack **stack_b,
-	int chunk_min, int chunk_max)
+void	push_chunk_to_b(t_stack **stack_a, t_stack **stack_b, int chunk_min,
+		int chunk_max)
 {
 	int	pos;
 
-	while ((pos = find_next_in_chunk(*stack_a, chunk_min, chunk_max)) != -1)
+	pos = find_next_in_chunk(*stack_a, chunk_min, chunk_max);
+	while (pos != -1)
 	{
 		if (pos <= stack_size(*stack_a) / 2)
 			while (pos-- > 0)
@@ -54,6 +66,7 @@ void	push_chunk_to_b(t_stack **stack_a, t_stack **stack_b,
 			while (pos++ < stack_size(*stack_a))
 				rra(stack_a);
 		pb(stack_a, stack_b);
+		pos = find_next_in_chunk(*stack_a, chunk_min, chunk_max);
 	}
 }
 

@@ -1,49 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/06 18:38:01 by elsahin           #+#    #+#             */
+/*   Updated: 2026/01/06 18:44:17 by elsahin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void parse_argument(char *arg, t_stack **a);
-void parse_number(char *str, t_stack **a);
+void	parse_argument(char *arg, t_stack **a);
+void	parse_number(char *str, t_stack **a);
 
-t_stack *parse_args(int argc, char **argv)
+t_stack	*parse_args(int argc, char **argv)
 {
-    t_stack *a;
-    int     i;
+	t_stack	*a;
+	int		i;
 
-    a = NULL;
-    i = 1;
-    while (i < argc)
-    {
-        parse_argument(argv[i], &a);
-        i++;
-    }
-    return (a);
-} 
-void parse_argument(char *arg, t_stack **a)
-{
-    char    **words;
-    int     j;
-
-    words = ft_split(arg, ' ');
-    if (!words || !words[0])
-        error();
-    j = 0;
-    while (words[j])
-    {
-        parse_number(words[j], a);
-        j++;
-    }
-    free_split(words);
+	a = NULL;
+	i = 1;
+	while (i < argc)
+	{
+		parse_argument(argv[i], &a);
+		i++;
+	}
+	return (a);
 }
-void parse_number(char *str, t_stack **a)
+
+void	parse_argument(char *arg, t_stack **a)
 {
-    long n;
+	char	**words;
+	int		j;
+
+	words = ft_split(arg, ' ');
+	if (!words || !words[0])
+		error();
+	j = 0;
+	while (words[j])
+	{
+		parse_number(words[j], a);
+		j++;
+	}
+	free_split(words);
+}
+
+void	parse_number(char *str, t_stack **a)
+{
+	long	n;
 	t_stack	*tmp;
 
-    if (!is_valid_number(str))
-        error();
-    n = ft_atol(str);
-    if (n < INT_MIN || n > INT_MAX)
+	if (!is_valid_number(str))
+		error();
+	n = ft_atol(str);
+	if (n < INT_MIN || n > INT_MAX)
 	{
-        error();
+		error();
 	}
 	tmp = *a;
 	while (tmp)
@@ -52,12 +66,12 @@ void parse_number(char *str, t_stack **a)
 			error();
 		tmp = tmp->next;
 	}
-    stack_add_back(a, stack_new((int)n));
+	stack_add_back(a, stack_new((int)n));
 }
 
 int	parse_flag(int ac, char **av, int *strat, int *bench)
 {
-	int i;
+	int	i;
 
 	*strat = 0;
 	*bench = 0;
@@ -65,7 +79,7 @@ int	parse_flag(int ac, char **av, int *strat, int *bench)
 	while (i < ac)
 	{
 		if (ft_strncmp(av[i], "--", 2) != 0)
-			break;
+			break ;
 		if (ft_strncmp(av[i], "--bench", 8) == 0)
 			*bench = 1;
 		else if (ft_strncmp(av[i], "--simple", 9) == 0)
@@ -82,4 +96,3 @@ int	parse_flag(int ac, char **av, int *strat, int *bench)
 	}
 	return (i);
 }
-

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/06 18:38:21 by elsahin           #+#    #+#             */
+/*   Updated: 2026/01/06 18:43:52 by elsahin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-t_stack *stack_new(int value)
+t_stack	*stack_new(int value)
 {
-	t_stack *new;
+	t_stack	*new;
 
 	new = malloc(sizeof(t_stack));
 	if (!new)
@@ -12,9 +24,9 @@ t_stack *stack_new(int value)
 	return (new);
 }
 
-void    stack_add_back(t_stack **stack, t_stack *new)
+void	stack_add_back(t_stack **stack, t_stack *new)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!stack || !new)
 		return ;
@@ -29,10 +41,10 @@ void    stack_add_back(t_stack **stack, t_stack *new)
 	tmp->next = new;
 }
 
-int     stack_size(t_stack *stack)
+int	stack_size(t_stack *stack)
 {
-	int i;
-	t_stack *tmp;
+	int		i;
+	t_stack	*tmp;
 
 	i = 0;
 	tmp = stack;
@@ -44,7 +56,7 @@ int     stack_size(t_stack *stack)
 	return (i);
 }
 
-int     is_sorted(t_stack *stack)
+int	is_sorted(t_stack *stack)
 {
 	if (!stack)
 		return (1);
@@ -56,6 +68,7 @@ int     is_sorted(t_stack *stack)
 	}
 	return (1);
 }
+
 void	free_stack(t_stack *stack)
 {
 	t_stack	*tmp;
