@@ -19,7 +19,7 @@ SRCS        = srcs/parser.c \
               srcs/instructions/rotate.c \
               srcs/instructions/rrotate.c \
 			  srcs/sort/sort_adaptive.c \
-			  srcs/sort/sort_simple.c \
+			  srcs/sort/simple/sort_simple.c \
 			  srcs/sort/medium/sort_medium.c \
 			  srcs/sort/medium/chunk_sort.c \
 			  srcs/sort/medium/chunk_array.c \
