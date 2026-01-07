@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:38:01 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/06 18:44:17 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/07 10:18:33 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	parse_argument(char *arg, t_stack **a);
 void	parse_number(char *str, t_stack **a);
 
-t_stack	*parse_args(int argc, char **argv)
+t_stack	*parse_args(int argc, char **argv, int *strat, int *bench)
 {
 	t_stack	*a;
 	int		i;
 
 	a = NULL;
-	i = 1;
+	i = parse_flag(argc, argv, strat, bench);
 	while (i < argc)
 	{
 		parse_argument(argv[i], &a);

@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:40:37 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/06 18:45:23 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/07 10:37:45 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,40 @@ void	rotate(t_stack **stack)
 	last->next = first;
 }
 
-void	ra(t_stack **a)
+void	ra(t_stack **a, t_operation_count *op_count, bool bench_mode)
 {
 	rotate(a);
-	write(1, "ra\n", 3);
+	if (op_count)
+	{
+		op_count->ra++;
+		op_count->total++;
+	}
+	if (!bench_mode)
+		write(1, "ra\n", 3);
 }
 
-void	rb(t_stack **b)
+void	rb(t_stack **b, t_operation_count *op_count, bool bench_mode)
 {
 	rotate(b);
-	write(1, "rb\n", 3);
+	if (op_count)
+	{
+		op_count->rb++;
+		op_count->total++;
+	}
+	if (!bench_mode)
+		write(1, "rb\n", 3);
 }
 
-void	rr(t_stack **a, t_stack **b)
+void	rr(t_stack **a, t_stack **b, t_operation_count *op_count,
+		bool bench_mode)
 {
 	rotate(a);
 	rotate(b);
-	write(1, "rr\n", 3);
+	if (op_count)
+	{
+		op_count->rr++;
+		op_count->total++;
+	}
+	if (!bench_mode)
+		write(1, "rr\n", 3);
 }
