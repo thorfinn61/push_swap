@@ -6,14 +6,13 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:40:02 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/07 10:42:37 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/08 23:00:00 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push_chunks_to_b(t_chunk_data *data, t_operation_count *op_count,
-		bool bench_mode)
+static void	push_chunks_to_b(t_chunk_data *data)
 {
 	int				start;
 	int				end;
@@ -28,13 +27,12 @@ static void	push_chunks_to_b(t_chunk_data *data, t_operation_count *op_count,
 			end = data->size - 1;
 		params.chunk_min = data->arr[start];
 		params.chunk_max = data->arr[end];
-		push_chunk_to_b(&params, op_count, bench_mode);
+		push_chunk_to_b(&params);
 		start += data->chunk_size;
 	}
 }
 
-void	chunk_sort(t_stack **a, t_stack **b, t_operation_count *op_count,
-		bool bench_mode)
+void	chunk_sort(t_stack **a, t_stack **b)
 {
 	int				*arr;
 	int				size;
@@ -44,7 +42,7 @@ void	chunk_sort(t_stack **a, t_stack **b, t_operation_count *op_count,
 	size = stack_size(*a);
 	if (size <= 5)
 	{
-		sort_simple(a, b, op_count, bench_mode);
+		sort_simple(a, b);
 		return ;
 	}
 	arr = prepare_sorted_array(*a, size);
@@ -53,9 +51,7 @@ void	chunk_sort(t_stack **a, t_stack **b, t_operation_count *op_count,
 	else
 		chunk_size = size / 10 + 1;
 	data = (t_chunk_data){a, b, arr, size, chunk_size};
-	push_chunks_to_b(&data, op_count, bench_mode);
+	push_chunks_to_b(&data);
 	free(arr);
-	move_back_to_a(a, b, op_count, bench_mode);
-	if (bench_mode)
-		print_benchmark_wrapper(op_count, 0.5, "Medium", "O(n log n)");
+	move_back_to_a(a, b);
 }

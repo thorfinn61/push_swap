@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:40:47 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/07 10:38:02 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/08 23:00:00 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,40 +31,21 @@ static void	reverse_rotate_stack(t_stack **stack)
 	*stack = last;
 }
 
-void	rra(t_stack **a, t_operation_count *op_count, bool bench_mode)
+void	rra(t_stack **a)
 {
 	reverse_rotate_stack(a);
-	if (op_count)
-	{
-		op_count->rra++;
-		op_count->total++;
-	}
-	if (!bench_mode)
-		write(1, "rra\n", 4);
+	write(1, "rra\n", 4);
 }
 
-void	rrb(t_stack **b, t_operation_count *op_count, bool bench_mode)
+void	rrb(t_stack **b)
 {
 	reverse_rotate_stack(b);
-	if (op_count)
-	{
-		op_count->rrb++;
-		op_count->total++;
-	}
-	if (!bench_mode)
-		write(1, "rrb\n", 4);
+	write(1, "rrb\n", 4);
 }
 
-void	rrr(t_stack **a, t_stack **b, t_operation_count *op_count,
-		bool bench_mode)
+void	rrr(t_stack **a, t_stack **b)
 {
 	reverse_rotate_stack(a);
 	reverse_rotate_stack(b);
-	if (op_count)
-	{
-		op_count->rrr++;
-		op_count->total++;
-	}
-	if (!bench_mode)
-		write(1, "rrr\n", 4);
+	write(1, "rrr\n", 4);
 }

@@ -25,8 +25,7 @@ SRCS        = srcs/parser.c \
 			  srcs/sort/medium/chunk_array.c \
 			  srcs/sort/medium/chunk_ops.c \
 			  srcs/sort/complex/sort_complex.c \
-			  srcs/utils/benchmark.c \
-			  srcs/disorder.c \
+			  srcs/disorder.c
 
 OBJS        = $(SRCS:.c=.o)
 

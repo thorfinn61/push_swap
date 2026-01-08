@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:39:17 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/07 10:41:46 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/08 23:00:00 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ static int	find_min_index(t_stack *stack)
 	return (min_index);
 }
 
-static void	push_min_to_b(t_stack **a, t_stack **b, t_operation_count *op_count,
-		bool bench_mode)
+static void	push_min_to_b(t_stack **a, t_stack **b)
 {
 	int	size;
 	int	min_index;
@@ -49,19 +48,18 @@ static void	push_min_to_b(t_stack **a, t_stack **b, t_operation_count *op_count,
 	if (min_index <= size / 2)
 	{
 		while (min_index-- > 0)
-			ra(a, op_count, bench_mode);
+			ra(a);
 	}
 	else
 	{
 		min_index = size - min_index;
 		while (min_index-- > 0)
-			rra(a, op_count, bench_mode);
+			rra(a);
 	}
-	pb(a, b, op_count, bench_mode);
+	pb(a, b);
 }
 
-void	sort_simple(t_stack **a, t_stack **b, t_operation_count *op_count,
-		bool bench_mode)
+void	sort_simple(t_stack **a, t_stack **b)
 {
 	int	size;
 
@@ -69,9 +67,7 @@ void	sort_simple(t_stack **a, t_stack **b, t_operation_count *op_count,
 		return ;
 	size = stack_size(*a);
 	while (size-- > 0)
-		push_min_to_b(a, b, op_count, bench_mode);
+		push_min_to_b(a, b);
 	while (*b)
-		pa(a, b, op_count, bench_mode);
-	if (bench_mode)
-		print_benchmark_wrapper(op_count, 1.0, "Simple", "O(n^2)");
+		pa(a, b);
 }
