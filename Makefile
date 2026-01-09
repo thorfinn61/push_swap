@@ -6,7 +6,7 @@ NAME        = push_swap
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 
-INCLUDES    = -Iincludes
+INCLUDES    = -Iincludes -Ift_printf
 
 SRCS        = srcs/parser.c \
 			  srcs/main.c \
@@ -14,6 +14,7 @@ SRCS        = srcs/parser.c \
               srcs/stack.c \
               srcs/utils/error.c \
 			  srcs/utils/split.c \
+			  srcs/utils/bench.c \
               srcs/instructions/swap.c \
               srcs/instructions/push.c \
               srcs/instructions/rotate.c \
@@ -25,7 +26,9 @@ SRCS        = srcs/parser.c \
 			  srcs/sort/medium/chunk_array.c \
 			  srcs/sort/medium/chunk_ops.c \
 			  srcs/sort/complex/sort_complex.c \
-			  srcs/disorder.c
+			  srcs/disorder.c \
+			  ft_printf/ft_printf.c \
+			  ft_printf/utils.c
 
 OBJS        = $(SRCS:.c=.o)
 

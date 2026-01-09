@@ -6,33 +6,33 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:41:20 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/09 16:42:27 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/09 17:42:38 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include "ft_printf.h"
 # include <limits.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
 typedef struct s_bench
 {
-	int	sa;
-	int	sb;
-	int	ss;
-	int	pa;
-	int	pb;
-	int	ra;
-	int	rb;
-	int	rr;
-	int	rra;
-	int	rrb;
-	int	rrr;
-	int	total_vals;
-}	t_bench;
+	int				sa;
+	int				sb;
+	int				ss;
+	int				pa;
+	int				pb;
+	int				ra;
+	int				rb;
+	int				rr;
+	int				rra;
+	int				rrb;
+	int				rrr;
+	int				total_vals;
+}					t_bench;
 
 typedef struct s_stack
 {
@@ -42,22 +42,22 @@ typedef struct s_stack
 
 typedef struct s_chunk_data
 {
-	t_stack	**a;
-	t_stack	**b;
-	int		*arr;
-	int		size;
-	int		chunk_size;
-	t_bench	*bench;
-}	t_chunk_data;
+	t_stack			**a;
+	t_stack			**b;
+	int				*arr;
+	int				size;
+	int				chunk_size;
+	t_bench			*bench;
+}					t_chunk_data;
 
 typedef struct s_chunk_params
 {
-	t_stack	**stack_a;
-	t_stack	**stack_b;
-	int		chunk_min;
-	int		chunk_max;
-	t_bench	*bench;
-}	t_chunk_params;
+	t_stack			**stack_a;
+	t_stack			**stack_b;
+	int				chunk_min;
+	int				chunk_max;
+	t_bench			*bench;
+}					t_chunk_params;
 
 void				error(void);
 
@@ -95,13 +95,16 @@ void				rrr(t_stack **a, t_stack **b, t_bench *bench);
 
 double				compute_disorder(t_stack *a);
 
+void				print_bench(t_bench *b, int strat, int used_strat, double disorder);
+
 // Sort
 void				sort_simple(t_stack **a, t_stack **b, t_bench *bench);
 void				sort_medium(t_stack **a, t_stack **b, t_bench *bench);
 void				chunk_sort(t_stack **a, t_stack **b, t_bench *bench);
 int					*prepare_sorted_array(t_stack *s, int size);
 void				push_chunk_to_b(t_chunk_params *params);
-void				move_back_to_a(t_stack **stack_a, t_stack **stack_b, t_bench *bench);
+void				move_back_to_a(t_stack **stack_a, t_stack **stack_b,
+						t_bench *bench);
 void				sort_complex(t_stack **a, t_stack **b, t_bench *bench);
-void				sort_adaptive(t_stack **a, t_stack **b, t_bench *bench);
+int					sort_adaptive(t_stack **a, t_stack **b, t_bench *bench);
 #endif
