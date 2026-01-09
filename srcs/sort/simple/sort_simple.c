@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:39:17 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/08 23:00:00 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/09 16:42:25 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	find_min_index(t_stack *stack)
 	return (min_index);
 }
 
-static void	push_min_to_b(t_stack **a, t_stack **b)
+static void	push_min_to_b(t_stack **a, t_stack **b, t_bench *bench)
 {
 	int	size;
 	int	min_index;
@@ -48,18 +48,18 @@ static void	push_min_to_b(t_stack **a, t_stack **b)
 	if (min_index <= size / 2)
 	{
 		while (min_index-- > 0)
-			ra(a);
+			ra(a, bench);
 	}
 	else
 	{
 		min_index = size - min_index;
 		while (min_index-- > 0)
-			rra(a);
+			rra(a, bench);
 	}
-	pb(a, b);
+	pb(a, b, bench);
 }
 
-void	sort_simple(t_stack **a, t_stack **b)
+void	sort_simple(t_stack **a, t_stack **b, t_bench *bench)
 {
 	int	size;
 
@@ -67,7 +67,7 @@ void	sort_simple(t_stack **a, t_stack **b)
 		return ;
 	size = stack_size(*a);
 	while (size-- > 0)
-		push_min_to_b(a, b);
+		push_min_to_b(a, b, bench);
 	while (*b)
-		pa(a, b);
+		pa(a, b, bench);
 }

@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:40:02 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/08 23:00:00 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/09 16:42:26 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	push_chunks_to_b(t_chunk_data *data)
 	int				end;
 	t_chunk_params	params;
 
-	params = (t_chunk_params){data->a, data->b, 0, 0};
+	params = (t_chunk_params){data->a, data->b, 0, 0, data->bench};
 	start = 0;
 	while (start < data->size)
 	{
@@ -32,7 +32,7 @@ static void	push_chunks_to_b(t_chunk_data *data)
 	}
 }
 
-void	chunk_sort(t_stack **a, t_stack **b)
+void	chunk_sort(t_stack **a, t_stack **b, t_bench *bench)
 {
 	int				*arr;
 	int				size;
@@ -42,7 +42,7 @@ void	chunk_sort(t_stack **a, t_stack **b)
 	size = stack_size(*a);
 	if (size <= 5)
 	{
-		sort_simple(a, b);
+		sort_simple(a, b, bench);
 		return ;
 	}
 	arr = prepare_sorted_array(*a, size);
@@ -50,8 +50,8 @@ void	chunk_sort(t_stack **a, t_stack **b)
 		chunk_size = 20;
 	else
 		chunk_size = size / 10 + 1;
-	data = (t_chunk_data){a, b, arr, size, chunk_size};
+	data = (t_chunk_data){a, b, arr, size, chunk_size, bench};
 	push_chunks_to_b(&data);
 	free(arr);
-	move_back_to_a(a, b);
+	move_back_to_a(a, b, bench);
 }

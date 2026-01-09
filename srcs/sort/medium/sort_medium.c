@@ -6,13 +6,13 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:40:11 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/08 23:00:00 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/09 16:42:26 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_medium(t_stack **a, t_stack **b)
+void	sort_medium(t_stack **a, t_stack **b, t_bench *bench)
 {
-	chunk_sort(a, b);
+	chunk_sort(a, b, bench);
 }
