@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:41:20 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/09 17:42:38 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/09 18:13:52 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void				rrr(t_stack **a, t_stack **b, t_bench *bench);
 
 double				compute_disorder(t_stack *a);
 
-void				print_bench(t_bench *b, int strat, int used_strat, double disorder);
+void				print_bench(t_bench *b, int strat, int used_strat,
+						double disorder);
 
 // Sort
 void				sort_simple(t_stack **a, t_stack **b, t_bench *bench);
