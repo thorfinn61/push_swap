@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:39:35 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/09 18:13:36 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/12 15:25:00 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ int	sort_adaptive(t_stack **a, t_stack **b, t_bench *bench)
 		return (0);
 	size = stack_size(*a);
 	disorder = compute_disorder(*a);
-	if (size <= 5 || disorder < 0.2)
+	if (size <= 5 || (disorder < 0.2 && size <= 100))
 	{
 		sort_simple(a, b, bench);
 		return (1);
 	}
-	else if (disorder < 0.5)
-	{
-		sort_medium(a, b, bench);
-		return (2);
-	}
-	else
+	else if (size > 100)
 	{
 		sort_complex(a, b, bench);
 		return (3);
+	}
+	else
+	{
+		sort_medium(a, b, bench);
+		return (2);
 	}
 }

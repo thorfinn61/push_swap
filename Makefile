@@ -12,6 +12,7 @@ SRCS        = srcs/parser.c \
 			  srcs/main.c \
               srcs/utils/parser_utils.c \
               srcs/stack.c \
+			  srcs//utils/stack_utils.c \
               srcs/utils/error.c \
 			  srcs/utils/split.c \
 			  srcs/utils/bench.c \
@@ -26,6 +27,8 @@ SRCS        = srcs/parser.c \
 			  srcs/sort/medium/chunk_array.c \
 			  srcs/sort/medium/chunk_ops.c \
 			  srcs/sort/complex/sort_complex.c \
+			  srcs/sort/complex/turkish_utils.c \
+			  srcs/sort/complex/turkish_exec.c \
 			  srcs/disorder.c \
 			  ft_printf/ft_printf.c \
 			  ft_printf/utils.c

@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:41:20 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/09 18:13:52 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/12 15:24:59 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,15 @@ void				move_back_to_a(t_stack **stack_a, t_stack **stack_b,
 						t_bench *bench);
 void				sort_complex(t_stack **a, t_stack **b, t_bench *bench);
 int					sort_adaptive(t_stack **a, t_stack **b, t_bench *bench);
+
+// Turkish Utils
+int					get_min_val(t_stack *stack);
+int					get_max_val(t_stack *stack);
+int					get_index(t_stack *stack, int value);
+int					get_target_pos(t_stack *a, int val_b);
+int					find_cheapest(t_stack *a, t_stack *b, int *best_ca,
+						int *best_cb);
+void				execute_move(t_stack **a, t_stack **b, int ca, int cb,
+						t_bench *s);
+
 #endif
