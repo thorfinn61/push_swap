@@ -9,10 +9,9 @@ CFLAGS      = -Wall -Wextra -Werror
 INCLUDES    = -Iincludes -Ift_printf
 
 SRCS        = srcs/parser.c \
-			  srcs/main.c \
               srcs/utils/parser_utils.c \
               srcs/stack.c \
-			  srcs//utils/stack_utils.c \
+			  srcs/utils/stack_utils.c \
               srcs/utils/error.c \
 			  srcs/utils/split.c \
 			  srcs/utils/bench.c \
@@ -33,7 +32,12 @@ SRCS        = srcs/parser.c \
 			  ft_printf/ft_printf.c \
 			  ft_printf/utils.c
 
+MAIN_SRC    = srcs/main.c
+BONUS_SRC   = bonus/checker.c
+
 OBJS        = $(SRCS:.c=.o)
+MAIN_OBJ    = $(MAIN_SRC:.c=.o)
+BONUS_OBJ   = $(BONUS_SRC:.c=.o)
 
 # =======================
 # Rules
@@ -41,17 +45,20 @@ OBJS        = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJS) $(MAIN_OBJ)
+	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) -o $(NAME)
+
+bonus: $(OBJS) $(BONUS_OBJ)
+	$(CC) $(CFLAGS) $(OBJS) $(BONUS_OBJ) -o checker
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(MAIN_OBJ) $(BONUS_OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) checker
 
 re: fclean all
 
