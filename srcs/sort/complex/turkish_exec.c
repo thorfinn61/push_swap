@@ -6,14 +6,13 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 18:40:20 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/12 15:26:19 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/13 11:08:17 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	calculate_costs(int *cost_a, int *cost_b, t_stack *a, t_stack *b,
-		int val_b)
+static void	calculate_costs(t_cost *cost, t_stack *a, t_stack *b, int val_b)
 {
 	int	size_a;
 	int	size_b;
@@ -25,84 +24,91 @@ static void	calculate_costs(int *cost_a, int *cost_b, t_stack *a, t_stack *b,
 	idx_a = get_target_pos(a, val_b);
 	idx_b = get_index(b, val_b);
 	if (idx_a > size_a / 2)
-		*cost_a = (size_a - idx_a) * -1;
+		cost->a = (size_a - idx_a) * -1;
 	else
-		*cost_a = idx_a;
+		cost->a = idx_a;
 	if (idx_b > size_b / 2)
-		*cost_b = (size_b - idx_b) * -1;
+		cost->b = (size_b - idx_b) * -1;
 	else
-		*cost_b = idx_b;
+		cost->b = idx_b;
 }
 
-/*
-** Finds the cheapest element to move from B to A.
-** Returns the value of the cheapest element.
-** Updates the pointers to costs via arguments.
-*/
+static int	calc_total(t_cost cost)
+{
+	if ((cost.a > 0 && cost.b > 0) || (cost.a < 0 && cost.b < 0))
+	{
+		if (abs(cost.a) > abs(cost.b))
+			return (abs(cost.a));
+		return (abs(cost.b));
+	}
+	return (abs(cost.a) + abs(cost.b));
+}
+
 int	find_cheapest(t_stack *a, t_stack *b, int *best_ca, int *best_cb)
 {
-	int		min_total;
-	int		ca;
-	int		cb;
-	int		curr_total;
-	int		val_best;
-	t_stack	*tmp_b;
+	int		min;
+	int		cur;
+	t_cost	c;
+	t_stack	*tmp;
+	int		best_val;
 
-	tmp_b = b;
-	min_total = INT_MAX;
-	val_best = 0;
-	while (tmp_b)
+	tmp = b;
+	min = INT_MAX;
+	best_val = 0;
+	while (tmp)
 	{
-		calculate_costs(&ca, &cb, a, b, tmp_b->value);
-		if ((ca > 0 && cb > 0) || (ca < 0 && cb < 0))
-			curr_total = abs(ca) > abs(cb) ? abs(ca) : abs(cb);
-		else
-			curr_total = abs(ca) + abs(cb);
-		if (curr_total < min_total)
+		calculate_costs(&c, a, b, tmp->value);
+		cur = calc_total(c);
+		if (cur < min)
 		{
-			min_total = curr_total;
-			*best_ca = ca;
-			*best_cb = cb;
-			val_best = tmp_b->value;
+			min = cur;
+			*best_ca = c.a;
+			*best_cb = c.b;
+			best_val = tmp->value;
 		}
-		tmp_b = tmp_b->next;
+		tmp = tmp->next;
 	}
-	return (val_best);
+	return (best_val);
 }
 
-void	execute_move(t_stack **a, t_stack **b, int ca, int cb, t_bench *s)
+static void	exec_both(t_stack **a, t_stack **b, t_cost *c, t_bench *s)
 {
-	while (ca > 0 && cb > 0)
+	while (c->a > 0 && c->b > 0)
 	{
 		rr(a, b, s);
-		ca--;
-		cb--;
+		c->a--;
+		c->b--;
 	}
-	while (ca < 0 && cb < 0)
+	while (c->a < 0 && c->b < 0)
 	{
 		rrr(a, b, s);
-		ca++;
-		cb++;
+		c->a++;
+		c->b++;
 	}
-	while (ca > 0)
+}
+
+void	execute_move(t_stack **a, t_stack **b, t_cost c, t_bench *s)
+{
+	exec_both(a, b, &c, s);
+	while (c.a > 0)
 	{
 		ra(a, s);
-		ca--;
+		c.a--;
 	}
-	while (ca < 0)
+	while (c.a < 0)
 	{
 		rra(a, s);
-		ca++;
+		c.a++;
 	}
-	while (cb > 0)
+	while (c.b > 0)
 	{
 		rb(b, s);
-		cb--;
+		c.b--;
 	}
-	while (cb < 0)
+	while (c.b < 0)
 	{
 		rrb(b, s);
-		cb++;
+		c.b++;
 	}
 	pa(a, b, s);
 }

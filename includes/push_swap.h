@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:41:20 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/12 15:24:59 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/13 11:08:24 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+typedef struct s_cost
+{
+	int				a;
+	int				b;
+}					t_cost;
 
 typedef struct s_bench
 {
@@ -116,7 +122,7 @@ int					get_index(t_stack *stack, int value);
 int					get_target_pos(t_stack *a, int val_b);
 int					find_cheapest(t_stack *a, t_stack *b, int *best_ca,
 						int *best_cb);
-void				execute_move(t_stack **a, t_stack **b, int ca, int cb,
+void				execute_move(t_stack **a, t_stack **b, t_cost cost,
 						t_bench *s);
 
 #endif

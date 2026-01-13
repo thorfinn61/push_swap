@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:40:20 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/12 14:43:44 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/13 11:08:25 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	sort_complex(t_stack **a, t_stack **b, t_bench *bench)
 	while (*b)
 	{
 		find_cheapest(*a, *b, &best_ca, &best_cb);
-		execute_move(a, b, best_ca, best_cb, bench);
+		execute_move(a, b, (t_cost){best_ca, best_cb}, bench);
 	}
 	final_rotation(a, bench);
 }
