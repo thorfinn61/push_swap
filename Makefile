@@ -26,8 +26,8 @@ SRCS        = srcs/parser.c \
 			  srcs/sort/medium/chunk_array.c \
 			  srcs/sort/medium/chunk_ops.c \
 			  srcs/sort/complex/sort_complex.c \
-			  srcs/sort/complex/turkish_utils.c \
-			  srcs/sort/complex/turkish_exec.c \
+			  srcs/sort/complex/quick_utils.c \
+			  srcs/sort/complex/quick_base.c \
 			  srcs/disorder.c \
 			  ft_printf/ft_printf.c \
 			  ft_printf/utils.c

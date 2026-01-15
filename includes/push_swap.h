@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Elyesa1 <Elyesa1@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:41:20 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/13 11:08:24 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/16 00:34:21 by Elyesa1          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,12 @@ void				move_back_to_a(t_stack **stack_a, t_stack **stack_b,
 void				sort_complex(t_stack **a, t_stack **b, t_bench *bench);
 int					sort_adaptive(t_stack **a, t_stack **b, t_bench *bench);
 
-// Turkish Utils
-int					get_min_val(t_stack *stack);
-int					get_max_val(t_stack *stack);
-int					get_index(t_stack *stack, int value);
-int					get_target_pos(t_stack *a, int val_b);
-int					find_cheapest(t_stack *a, t_stack *b, int *best_ca,
-						int *best_cb);
-void				execute_move(t_stack **a, t_stack **b, t_cost cost,
-						t_bench *s);
+// Quick Utils
+int					qs_get_pivot(t_stack *stack, int count);
+void				qs_sort_three_a(t_stack **a, t_bench *bench);
+int					qs_is_sorted(t_stack *stack, int count);
+int					qs_handle_base_a(t_stack **a, int count, t_bench *bench);
+int					qs_handle_base_b(t_stack **a, t_stack **b, int count,
+						t_bench *bench);
 
 #endif

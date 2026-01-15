@@ -3,79 +3,85 @@
 /*                                                        :::      ::::::::   */
 /*   sort_complex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Elyesa1 <Elyesa1@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:40:20 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/13 15:14:48 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/16 00:49:41 by Elyesa1          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
-** Sorts 3 elements in A.
-*/
-static void	sort_three_a(t_stack **a, t_bench *bench)
+static void	restore_stack(t_stack **stack, t_bench *bench, int count, int type)
 {
-	int	m;
-	int	top;
-	int	mid;
+	int	i;
 
-	if (stack_size(*a) != 3)
+	i = 0;
+	if (stack_size(*stack) == count)
 		return ;
-	m = get_max_val(*a);
-	top = (*a)->value;
-	mid = (*a)->next->value;
-	if (top == m)
-		ra(a, bench);
-	else if (mid == m)
-		rra(a, bench);
-	if ((*a)->value > (*a)->next->value)
-		sa(a, bench);
+	while (i < count)
+	{
+		if (type == 0)
+			rra(stack, bench);
+		else
+			rrb(stack, bench);
+		i++;
+	}
 }
 
-static void	final_rotation(t_stack **a, t_bench *bench)
+static void	quicksort_b(t_stack **a, t_stack **b, int count, t_bench *bench);
+
+static void	quicksort_a(t_stack **a, t_stack **b, int count, t_bench *bench)
 {
-	int	min_idx;
-	int	size_a;
+	int	pivot;
+	int	pushed;
+	int	rotated;
+	int	i;
 
-	min_idx = get_index(*a, get_min_val(*a));
-	size_a = stack_size(*a);
-	if (min_idx < size_a / 2)
+	if (qs_handle_base_a(a, count, bench))
+		return ;
+	pivot = qs_get_pivot(*a, count);
+	pushed = 0;
+	rotated = 0;
+	i = count;
+	while (i--)
 	{
-		while ((*a)->value != get_min_val(*a))
-			ra(a, bench);
+		if ((*a)->value < pivot)
+			(pb(a, b, bench), pushed++);
+		else
+			(ra(a, bench), rotated++);
 	}
-	else
-	{
-		while ((*a)->value != get_min_val(*a))
-			rra(a, bench);
-	}
+	restore_stack(a, bench, rotated, 0);
+	quicksort_a(a, b, rotated, bench);
+	quicksort_b(a, b, pushed, bench);
 }
 
-/*
-** Step 1: Push everything to B except 3 numbers.
-** Step 2: Sort the 3 remaining in A.
-** Step 3: Loop B -> A with cheapest move.
-** Step 4: Final rotation to align min at top of A.
-*/
+static void	quicksort_b(t_stack **a, t_stack **b, int count, t_bench *bench)
+{
+	int	pivot;
+	int	pushed;
+	int	rotated;
+	int	i;
+
+	if (qs_handle_base_b(a, b, count, bench))
+		return ;
+	pivot = qs_get_pivot(*b, count);
+	pushed = 0;
+	rotated = 0;
+	i = count;
+	while (i--)
+	{
+		if ((*b)->value >= pivot)
+			(pa(a, b, bench), pushed++);
+		else
+			(rb(b, bench), rotated++);
+	}
+	quicksort_a(a, b, pushed, bench);
+	restore_stack(b, bench, rotated, 1);
+	quicksort_b(a, b, rotated, bench);
+}
+
 void	sort_complex(t_stack **a, t_stack **b, t_bench *bench)
 {
-	int	size_a;
-	int	best_ca;
-	int	best_cb;
-
-	size_a = stack_size(*a);
-	while (size_a > 3)
-	{
-		pb(a, b, bench);
-		size_a--;
-	}
-	sort_three_a(a, bench);
-	while (*b)
-	{
-		find_cheapest(*a, *b, &best_ca, &best_cb);
-		execute_move(a, b, (t_cost){best_ca, best_cb}, bench);
-	}
-	final_rotation(a, bench);
+	quicksort_a(a, b, stack_size(*a), bench);
 }
