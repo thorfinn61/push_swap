@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:38:01 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/09 16:42:25 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/16 12:40:21 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,30 +67,41 @@ void	parse_number(char *str, t_stack **a)
 	stack_add_back(a, stack_new((int)n));
 }
 
+static void	process_flag(char *s, int *strat, int *bench)
+{
+	if (!ft_strncmp(s, "--bench", 8))
+	{
+		if (*bench)
+			error();
+		*bench = 1;
+	}
+	else if (!ft_strncmp(s, "--simple", 9) && *strat == -1)
+		*strat = 1;
+	else if (!ft_strncmp(s, "--medium", 9) && *strat == -1)
+		*strat = 2;
+	else if (!ft_strncmp(s, "--complex", 10) && *strat == -1)
+		*strat = 3;
+	else if (!ft_strncmp(s, "--adaptive", 11) && *strat == -1)
+		*strat = 0;
+	else
+		error();
+}
+
 int	parse_flag(int ac, char **av, int *strat, int *bench)
 {
 	int	i;
 
-	*strat = 0;
+	*strat = -1;
 	*bench = 0;
 	i = 1;
 	while (i < ac)
 	{
 		if (ft_strncmp(av[i], "--", 2) != 0)
 			break ;
-		if (ft_strncmp(av[i], "--simple", 8) == 0)
-			*strat = 1;
-		else if (ft_strncmp(av[i], "--medium", 8) == 0)
-			*strat = 2;
-		else if (ft_strncmp(av[i], "--complex", 9) == 0)
-			*strat = 3;
-		else if (ft_strncmp(av[i], "--adaptive", 10) == 0)
-			*strat = 0;
-		else if (ft_strncmp(av[i], "--bench", 7) == 0)
-			*bench = 1;
-		else
-			error();
+		process_flag(av[i], strat, bench);
 		i++;
 	}
+	if (*strat == -1)
+		*strat = 0;
 	return (i);
 }
