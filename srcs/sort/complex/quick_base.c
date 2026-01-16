@@ -6,7 +6,7 @@
 /*   By: Elyesa1 <Elyesa1@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 11:30:00 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/16 00:33:41 by Elyesa1          ###   ########.fr       */
+/*   Updated: 2026/01/16 01:05:36 by Elyesa1          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,16 @@ void	qs_sort_three_a(t_stack **a, t_bench *bench)
 
 int	qs_handle_base_a(t_stack **a, int count, t_bench *bench)
 {
-	if (count <= 3 || qs_is_sorted(*a, count))
+	if (qs_is_sorted(*a, count))
+		return (1);
+	if (count == 2)
 	{
-		if (count == 2 && (*a)->value > (*a)->next->value)
-			sa(a, bench);
-		else if (count == 3)
-			qs_sort_three_a(a, bench);
+		sa(a, bench);
+		return (1);
+	}
+	if (count == 3 && stack_size(*a) == 3)
+	{
+		qs_sort_three_a(a, bench);
 		return (1);
 	}
 	return (0);
