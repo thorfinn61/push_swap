@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:39:17 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/09 16:42:25 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/19 10:26:55 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ void	sort_simple(t_stack **a, t_stack **b, t_bench *bench)
 	if (!a || !*a)
 		return ;
 	size = stack_size(*a);
+	if (size == 2)
+	{
+		if ((*a)->value > (*a)->next->value)
+			sa(a, bench);
+		return ;
+	}
 	while (size-- > 0)
 		push_min_to_b(a, b, bench);
 	while (*b)
