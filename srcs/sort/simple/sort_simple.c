@@ -6,7 +6,7 @@
 /*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:39:17 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/19 10:26:55 by elsahin          ###   ########.fr       */
+/*   Updated: 2026/01/19 13:55:05 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ void	sort_simple(t_stack **a, t_stack **b, t_bench *bench)
 	{
 		if ((*a)->value > (*a)->next->value)
 			sa(a, bench);
+		return ;
+	}
+	if (size == 3)
+	{
+		qs_sort_three_a(a, bench);
 		return ;
 	}
 	while (size-- > 0)

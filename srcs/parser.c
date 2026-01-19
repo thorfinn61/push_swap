@@ -13,7 +13,7 @@
 #include "push_swap.h"
 
 void	parse_argument(char *arg, t_stack **a);
-void	parse_number(char *str, t_stack **a);
+int		parse_number(char *str, t_stack **a);
 
 t_stack	*parse_args(int argc, char **argv, int *strat, int *bench)
 {
@@ -37,34 +37,40 @@ void	parse_argument(char *arg, t_stack **a)
 
 	words = ft_split(arg, ' ');
 	if (!words || !words[0])
-		error();
+		free_error(*a, words);
 	j = 0;
 	while (words[j])
 	{
-		parse_number(words[j], a);
+		if (!parse_number(words[j], a))
+			free_error(*a, words);
 		j++;
 	}
 	free_split(words);
 }
 
-void	parse_number(char *str, t_stack **a)
+int	parse_number(char *str, t_stack **a)
 {
 	long	n;
 	t_stack	*tmp;
+	t_stack	*new_node;
 
 	if (!is_valid_number(str))
-		error();
+		return (0);
 	n = ft_atol(str);
 	if (n < INT_MIN || n > INT_MAX)
-		error();
+		return (0);
 	tmp = *a;
 	while (tmp)
 	{
 		if (tmp->value == (int)n)
-			error();
+			return (0);
 		tmp = tmp->next;
 	}
-	stack_add_back(a, stack_new((int)n));
+	new_node = stack_new((int)n);
+	if (!new_node)
+		return (0);
+	stack_add_back(a, new_node);
+	return (1);
 }
 
 static void	process_flag(char *s, int *strat, int *bench)

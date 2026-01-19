@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Elyesa1 <Elyesa1@student.42.fr>            +#+  +:+       +#+        */
+/*   By: elsahin <elsahin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:41:20 by elsahin           #+#    #+#             */
-/*   Updated: 2026/01/16 00:34:21 by Elyesa1          ###   ########.fr       */
+/*   Updated: 2026/01/19 13:50:45 by elsahin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_chunk_params
 }					t_chunk_params;
 
 void				error(void);
+void				free_error(t_stack *a, char **words);
 
 // Parser
 t_stack				*parse_args(int argc, char **argv, int *strat, int *bench);
@@ -75,6 +76,7 @@ long				ft_atol(const char *str);
 void				free_split(char **split);
 int					ft_strncmp(char *s1, char *s2, int n);
 int					parse_flag(int ac, char **av, int *strat, int *bench);
+int					parse_number(char *str, t_stack **a);
 
 // Stack
 t_stack				*stack_new(int value);
